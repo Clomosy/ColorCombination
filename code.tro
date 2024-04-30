@@ -136,7 +136,7 @@ OnlyLayout.Margins.Bottom = 100;
   FirstImg = MyForm.AddNewProImage(color1Pnl,'FirstImg');
   clComponent.SetupComponent(FirstImg,'{"Align" : "Client","BorderColor":"null","BackgroundColor":"null",
   "ImgUrl":"https://clomosy.com/illustration/erkekust.png"}');
-  //MyForm.AddNewEvent(FirstImg,tbeOnClick,'color1LblOnClick');
+  MyForm.AddNewEvent(FirstImg,tbeOnClick,'color1PnlOnClick');
   
   //---------------------------------------------------------------------------
   
@@ -155,6 +155,7 @@ OnlyLayout.Margins.Bottom = 100;
   SecondImg = MyForm.AddNewProImage(color2Pnl,'SecondImg');
   clComponent.SetupComponent(SecondImg,'{"Align" : "Client","BorderColor":"null",
   "BackgroundColor":"null","ImgUrl":"https://clomosy.com/illustration/erkekalt.png"}');
+  MyForm.AddNewEvent(SecondImg,tbeOnClick,'color2PnlOnClick');
   
   //---------------------------------------------------------------------------
   
@@ -174,6 +175,7 @@ OnlyLayout.Margins.Bottom = 100;
     ThirdImg = MyForm.AddNewProImage(color3Pnl,'ThirdImg');
   clComponent.SetupComponent(ThirdImg,'{"Align" : "Client","BorderColor":"null","BackgroundColor":"null",
   "ImgUrl":"https://clomosy.com/illustration/erkekayakkabi.png"}');
+  MyForm.AddNewEvent(ThirdImg,tbeOnClick,'color3PnlOnClick');
  
  //..............................................................................//
   
