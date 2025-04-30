@@ -1,213 +1,316 @@
-Var   
-MyForm:TclForm;
-TitleEdit: TClProEdit;
-color1Pnl,color2Pnl,color3Pnl:TclProPanel;
-FirstImg,SecondImg,ThirdImg:TclProImg;
-OnlyLayout,genderLyt:TclLayout;
-color1Lbl,color2Lbl,color3Lbl:TclProLabel;
-firstColor,lastColor:string;
-MaleBtn,femaleBtn:TcLProButton;
-genderState:integer;
-myObject : TclProLabel;
 
+  Var   
+  MainForm:TclForm;
+  TitleLbl: TClProEdit;
+  color1Pnl,color2Pnl,color3Pnl:TclProPanel;
+  FirstImg,SecondImg,ThirdImg:TclProImg;
+  OnlyLayout,genderLyt:TclLayout;
+  color1Lbl,color2Lbl,color3Lbl:TclProLabel;
+  firstColor,lastColor:string;
+  MaleBtn,femaleBtn:TcLProButton;
+  genderState:integer;
+  myObject : TclProLabel;
 
-void SetEdit;
-{
-  TitleEdit = MyForm.AddNewProEdit(MyForm,'TitleEdit','Kombinini Seçemedin Mi?');
-  clComponent.SetupComponent(TitleEdit,'{"Align" : "MostTop", "Height":55,"RoundHeight":13,
-  "RoundWidth":13,"BorderColor":"#f5f5f5","BorderWidth":4,"MarginLeft":30, "MarginRight":30}');
-  TitleEdit.enabled = False;
-}
+  void SetEdit;
+  {
+    TitleLbl = MainForm.AddNewProLabel(MainForm,'TitleLbl','Kombinini Seçemedin Mi?');
+    TitleLbl.enabled = False;
+    TitleLbl.Align = AlMostTop;
+    TitleLbl.Height=55;
+    TitleLbl.Margins.Left =  30;
+    TitleLbl.Margins.Right = 30;
+    TitleLbl.clProSettings.FontSize = 18;
+    TitleLbl.clProSettings.RoundHeight = 13 ;
+    TitleLbl.clProSettings.RoundWidth  = 13 ;
+    TitleLbl.clProSettings.BorderWidth = 4;
+    TitleLbl.clProSettings.BorderColor = clAlphaColor.clHexToColor('#cdcdcd');
+    TitleLbl.clProSettings.FontColor = clAlphaColor.clHexToColor('#008c67');
+    TitleLbl.clProSettings.BackgroundColor = clAlphaColor.clHexToColor('#cdcdcd');
+    TitleLbl.clProSettings.FontVertAlign = palcenter; 
+    TitleLbl.clProSettings.FontHorzAlign = palcenter; 
+    TitleLbl.clProSettings.WordWrap = True; 
+    TitleLbl.SetclProSettings(TitleLbl.clProSettings);
 
+  }
   
-function GenerateRandomHexColor: string;
-var
-Red, Green, Blue: Byte;
-{
-  Red = clMath.GenerateRandom(0,256);
-  Green = clMath.GenerateRandom(0,256);
-  Blue = clMath.GenerateRandom(0,256);
-  //Result = Format('#%.2x%.2x%.2x', [Red, Green, Blue]);
-  Result = '#' + IntToHex(Red, 2) + IntToHex(Green, 2) + IntToHex(Blue, 2); // Convert each value to a 2-digit hexadecimal string and concatenate them
-}
 
-void color1PnlOnClick;
-var
-rndmColor:string;
-{
-  rndmColor = GenerateRandomHexColor;
-  firstColor = rndmColor;
-  clComponent.SetupComponent(color1Pnl,'{"BackgroundColor":"'+rndmColor+'"}');
-  color1Lbl.Text = rndmColor; 
-  clComponent.SetupComponent(color1Lbl,'{"TextColor":"'+rndmColor+'"}');
-}
-void color2PnlOnClick;
-var
-rndmColor:string;
-{
+  function GenerateRandomHexColor: string;
+  var
+  Red, Green, Blue: Byte;
+  {
+    Red = clMath.GenerateRandom(0,256);
+    Green = clMath.GenerateRandom(0,256);
+    Blue = clMath.GenerateRandom(0,256);
+    //Result = Format('#%.2x%.2x%.2x', [Red, Green, Blue]);
+    Result = '#' + IntToHex(Red, 2) + IntToHex(Green, 2) + IntToHex(Blue, 2); // Convert each value to a 2-digit hexadecimal string and concatenate them
+  }
+
+  void color1PnlOnClick;
+  var
+  rndmColor:string;
+  {
     rndmColor = GenerateRandomHexColor;
-    clComponent.SetupComponent(color2Pnl,'{"BackgroundColor":"'+rndmColor+'"}');
-    color2Lbl.Text = rndmColor;
-    clComponent.SetupComponent(color2Lbl,'{"TextColor":"'+rndmColor+'"}');
-}
-void color3PnlOnClick;
-var
-rndmColor:string;
-{
-  rndmColor = GenerateRandomHexColor;
-  lastColor = rndmColor;
-  clComponent.SetupComponent(color3Pnl,'{"BackgroundColor":"'+rndmColor+'"}');
-  color3Lbl.Text = rndmColor;
-  clComponent.SetupComponent(color3Lbl,'{"TextColor":"'+rndmColor+'"}');
-}
-//her labelin kendi renk kodu kopyalansın!!!!
-void copy;
-{
-  clUtils.SaveToClipBoard(myObject.Text);
-  ShowMessage ('Kopyalandı');
-}
-void color1LblOnClick;
-{
-  myObject = color1Lbl ;
-  copy;
-}
-void color2LblOnClick;
-{
-  myObject = color2Lbl ;
-  copy;
-}
-void color3LblOnClick;
-{
-    myObject = color3Lbl ;
+    firstColor = rndmColor;
+    color1Pnl.clProSettings.BackgroundColor = clAlphaColor.clHexToColor(rndmColor);
+    color1Pnl.SetclProSettings(color1Pnl.clProSettings);
+
+
+
+    color1Lbl.Text = rndmColor; 
+    color1Lbl.clProSettings.FontColor = clAlphaColor.clHexToColor(rndmColor);
+    color1Lbl.SetclProSettings(color1Lbl.clProSettings);
+
+
+
+  }
+  void color2PnlOnClick;
+  var
+  rndmColor:string;
+  {
+      rndmColor = GenerateRandomHexColor;
+      color2Pnl.clProSettings.BackgroundColor = clAlphaColor.clHexToColor(rndmColor);
+      color2Pnl.SetclProSettings(color2Pnl.clProSettings);
+
+
+      color2Lbl.Text = rndmColor;
+      color2Lbl.clProSettings.FontColor = clAlphaColor.clHexToColor(rndmColor);
+      color2Lbl.SetclProSettings(color2Lbl.clProSettings);
+
+
+  }
+  void color3PnlOnClick;
+  var
+  rndmColor:string;
+  {
+    rndmColor = GenerateRandomHexColor;
+    lastColor = rndmColor;
+    color3Pnl.clProSettings.BackgroundColor = clAlphaColor.clHexToColor(rndmColor);
+    color3Pnl.SetclProSettings(color3Pnl.clProSettings);
+    color3Lbl.Text = rndmColor;
+    color3Lbl.clProSettings.FontColor = clAlphaColor.clHexToColor(rndmColor);
+    color3Lbl.SetclProSettings(color3Lbl.clProSettings);
+
+  }
+  //her labelin kendi renk kodu kopyalansin!!!!
+  void copy;
+  {
+    Clomosy.setClipBoard(myObject.Text);
+    ShowMessage ('Kopyalandı');
+  }
+  void color1LblOnClick;
+  {
+    myObject = color1Lbl ;
     copy;
-}
-void genderdetermination;
-{
-if (genderState==1)
-{
-  clComponent.SetupComponent(FirstImg,'{"ImgUrl":"https://clomosy.com/illustration/erkekust.png"}');
-  clComponent.SetupComponent(SecondImg,'{"ImgUrl":"https://clomosy.com/illustration/erkekalt.png"}');
-  clComponent.SetupComponent(ThirdImg,'{"ImgUrl":"https://clomosy.com/illustration/erkekayakkabi.png"}');
-}
-else
-{
-  clComponent.SetupComponent(FirstImg,'{"ImgUrl":"https://clomosy.com/illustration/kizust.png"}');
-  clComponent.SetupComponent(SecondImg,'{"ImgUrl":"https://clomosy.com/illustration/kizalt.png"}');
-  clComponent.SetupComponent(ThirdImg,'{"ImgUrl":"https://clomosy.com/illustration/kizayakkabi.png"}');
-}
-}
-void MaleBtnOnClick;
-{
-  genderState = 1;
-  genderdetermination;
-}
-void FemaleBtnOnClick;
-{
-  genderState = 0;
-  genderdetermination;
-}
+  }
+  void color2LblOnClick;
+  {
+    myObject = color2Lbl ;
+    copy;
+  }
+  void color3LblOnClick;
+  {
+      myObject = color3Lbl ;
+      copy;
+  }
+  void genderdetermination;
+  {
+  if (genderState==1)
+  {
+    FirstImg.clProSettings.PictureSource = 'https://clomosy.com/illustration/erkekust.png';
+    FirstImg.SetclProSettings(FirstImg.clProSettings);
+    SecondImg.clProSettings.PictureSource = 'https://clomosy.com/illustration/erkekalt.png';
+    SecondImg.SetclProSettings(SecondImg.clProSettings);
 
-{
-  MyForm = TclForm.Create(Self);
-  SetEdit;
-  
-//...........Layout.............//
-
-OnlyLayout = MyForm.AddNewLayout(MyForm,'OnlyLayout');
-OnlyLayout.Align = alClient;
-OnlyLayout.Margins.Top = 50;
-OnlyLayout.Margins.Bottom = 100;
+    ThirdImg.clProSettings.PictureSource = 'https://clomosy.com/illustration/erkekayakkabi.png';
+    ThirdImg.SetclProSettings(ThirdImg.clProSettings);
 
 
-//............Paneller..........//
+  }
+  else
+  {
+    FirstImg.clProSettings.PictureSource = 'https://clomosy.com/illustration/kizust.png';
+    FirstImg.SetclProSettings(FirstImg.clProSettings);
 
-  firstColor = '#5e61ff';
-  color1Pnl = MyForm.AddNewProPanel(OnlyLayout,'color1Pnl');
-  clComponent.SetupComponent(color1Pnl,'{"Align" : "MostTop",
-  "Height":140,"BackgroundColor":"#5e61ff"}');
-  MyForm.AddNewEvent(color1Pnl,tbeOnClick,'color1PnlOnClick');
-  
-  color1Lbl = MyForm.AddNewProLabel(color1Pnl,'color1Lbl','#5e61ff');
-  clComponent.SetupComponent(color1Lbl,'{"Align" : "Right","MarginTop":80,"RoundHeight":10,
-  "RoundWidth":10,"BorderColor":"null","BorderWidth":2,"BackgroundColor":"#ffffff",
-  "TextColor":"#AF1B3F","TextSize":20,"TextHorizontalAlign":"center","TextBold":"yes"}');
-  MyForm.AddNewEvent(color1Lbl,tbeOnClick,'color1LblOnClick');
-  
-  FirstImg = MyForm.AddNewProImage(color1Pnl,'FirstImg');
-  clComponent.SetupComponent(FirstImg,'{"Align" : "Client","BorderColor":"null","BackgroundColor":"null",
-  "ImgUrl":"https://clomosy.com/illustration/erkekust.png"}');
-  MyForm.AddNewEvent(FirstImg,tbeOnClick,'color1PnlOnClick');
-  
-  //---------------------------------------------------------------------------
-  
-  
-  color2Pnl = MyForm.AddNewProPanel(OnlyLayout,'color2Pnl');
-  clComponent.SetupComponent(color2Pnl,'{"Align" : "Top",
-  "Height":140,"BackgroundColor":"#AF1B3F"}');
-  MyForm.AddNewEvent(color2Pnl,tbeOnClick,'color2PnlOnClick');
-  
-  color2Lbl = MyForm.AddNewProLabel(color2Pnl,'color2Lbl','#AF1B3F');
-  clComponent.SetupComponent(color2Lbl,'{"Align" : "Right","MarginTop":80,"RoundHeight":10,
-  "RoundWidth":10,"BorderColor":"null","BorderWidth":2,"BackgroundColor":"#ffffff",
-  "TextColor":"#AF1B3F","TextSize":20,"TextHorizontalAlign":"center","TextBold":"yes"}');
-  MyForm.AddNewEvent(color2Lbl,tbeOnClick,'color2LblOnClick');
-  
-  SecondImg = MyForm.AddNewProImage(color2Pnl,'SecondImg');
-  clComponent.SetupComponent(SecondImg,'{"Align" : "Client","BorderColor":"null",
-  "BackgroundColor":"null","ImgUrl":"https://clomosy.com/illustration/erkekalt.png"}');
-  MyForm.AddNewEvent(SecondImg,tbeOnClick,'color2PnlOnClick');
-  
-  //---------------------------------------------------------------------------
-  
-  color3Pnl = MyForm.AddNewProPanel(OnlyLayout,'color3Pnl');
-  clComponent.SetupComponent(color3Pnl,'{"Align" : "Top",
-  "Height":140,
-  "BackgroundColor":"#01FDF6"}');
-  MyForm.AddNewEvent(color3Pnl,tbeOnClick,'color3PnlOnClick');
+
+    SecondImg.clProSettings.PictureSource = 'https://clomosy.com/illustration/kizalt.png';
+    SecondImg.SetclProSettings(SecondImg.clProSettings);
+
+
+    ThirdImg.clProSettings.PictureSource = 'https://clomosy.com/illustration/kizayakkabi.png';
+    ThirdImg.SetclProSettings(ThirdImg.clProSettings);
+
+
+  }
+  }
+  void MaleBtnOnClick;
+  {
+    genderState = 1;
+    genderdetermination;
+  }
+  void FemaleBtnOnClick;
+  {
+    genderState = 0;
+    genderdetermination;
+  }
+
+{
+  MainForm = TclForm.Create(Self);
+  MainForm.BtnFormMenu.Visible = False;
+  MainForm.FormWaiting.Visible = False;
+  MainForm.SetFormBGImage('https://clomosy.com/educa/bg1.png');
   lastColor = '#01FDF6';
   
-  color3Lbl = MyForm.AddNewProLabel(color3Pnl,'color3Lbl','#01FDF6');
-  clComponent.SetupComponent(color3Lbl,'{"Align" : "Right","MarginTop":80,"RoundHeight":10,
-  "RoundWidth":10,"BorderColor":"null","BorderWidth":2,"BackgroundColor":"#ffffff",
-  "TextColor":"#AF1B3F","TextSize":20,"TextHorizontalAlign":"center","TextBold":"yes"}');
-  MyForm.AddNewEvent(color3Lbl,tbeOnClick,'color3LblOnClick');
+  SetEdit;
   
-    ThirdImg = MyForm.AddNewProImage(color3Pnl,'ThirdImg');
-  clComponent.SetupComponent(ThirdImg,'{"Align" : "Client","BorderColor":"null","BackgroundColor":"null",
-  "ImgUrl":"https://clomosy.com/illustration/erkekayakkabi.png"}');
-  MyForm.AddNewEvent(ThirdImg,tbeOnClick,'color3PnlOnClick');
+  
+  //...........Layout.............//
+  
+  genderLyt = MainForm.AddNewLayout(MainForm,'testLayout');
+  genderLyt.Align = alBottom;
+  genderLyt.Height = 65;
+  genderLyt.Margins.Top = 20;
+  genderLyt.Margins.Left = 90;
+  genderLyt.Margins.Right = 90;
+  genderLyt.Margins.Bottom = 40;
+  
+  OnlyLayout = MainForm.AddNewLayout(MainForm,'OnlyLayout');
+  OnlyLayout.Align = alClient;
+  OnlyLayout.Margins.Top = 10;
+  OnlyLayout.Margins.Bottom = 10;
+  
+  
+  //............Paneller..........//
+  
+  firstColor = '#5e61ff';
+  color1Pnl = MainForm.AddNewProPanel(OnlyLayout,'color1Pnl');
+  color1Pnl.Align = AlMostTop ;
+  color1Pnl.Height = OnlyLayout.Height / 3 ;
+  color1Pnl.clProSettings.BackgroundColor = clAlphaColor.clHexToColor('#5e61ff');
+  color1Pnl.SetclProSettings(color1Pnl.clProSettings);
+  color1Pnl.OnClick='color1PnlOnClick';
+  
+  color1Lbl = MainForm.AddNewProLabel(color1Pnl,'color1Lbl','#5e61ff');
+  color1Lbl.Align = AlRight;
+  color1Lbl.Width = 80;
+  color1Lbl.Margins.Top = color1Pnl.Height/1.5;
+  color1Lbl.clProSettings.RoundHeight = 10;
+  color1Lbl.clProSettings.RoundHeight = 10;
+  color1Lbl.clProSettings.BorderWidth = 2;
+  color1Lbl.clProSettings.BackgroundColor = clAlphaColor.clHexToColor('#ffffff');
+  color1Lbl.clProSettings.FontColor = clAlphaColor.clHexToColor('#AF1B3F');
+  color1Lbl.clProSettings.FontSize = 16;
+  color1Lbl.clProSettings.FontVertAlign = palCenter;
+  color1Lbl.clProSettings.FontHorzAlign = palLeading;
+  color1Lbl.clProSettings.TextSettings.Font.Style = [fsBold];
+  color1Lbl.clProSettings.BorderColor = clAlphaColor.clHexToColor('#ffffff');
+  color1Lbl.clProSettings.WordWrap = True;
+  color1Lbl.SetclProSettings(color1Lbl.clProSettings);
+  color1Lbl.OnClick='color1LblOnClick';
+  
+  FirstImg = MainForm.AddNewProImage(color1Pnl,'FirstImg');
+  FirstImg.Align = alClient ;
+  FirstImg.clProSettings.PictureSource = 'https://clomosy.com/illustration/erkekust.png' ;
+  FirstImg.SetclProSettings(FirstImg.clProSettings);
+  FirstImg.OnClick='color1PnlOnClick';
+  
+  //---------------------------------------------------------------------------
+  
+  
+  color2Pnl = MainForm.AddNewProPanel(OnlyLayout,'color2Pnl');
+  color2Pnl.Align = AlTop ;
+  color2Pnl.Height = OnlyLayout.Height / 3;
+  color2Pnl.clProSettings.BackgroundColor = clAlphaColor.clHexToColor('#AF1B3F');
+  color2Pnl.SetclProSettings(color2Pnl.clProSettings);
+  color2Pnl.OnClick='color2PnlOnClick';
+  
+  color2Lbl = MainForm.AddNewProLabel(color2Pnl,'color2Lbl','#AF1B3F');
+  color2Lbl.Align = AlRight;
+  color2Lbl.Width = 80;
+  color2Lbl.Margins.Top = color2Pnl.Height/1.5;
+  color2Lbl.clProSettings.RoundHeight = 10;
+  color2Lbl.clProSettings.RoundHeight = 10;
+  color2Lbl.clProSettings.BorderWidth = 2;
+  color2Lbl.clProSettings.BackgroundColor = clAlphaColor.clHexToColor('#ffffff');
+  color2Lbl.clProSettings.FontColor = clAlphaColor.clHexToColor('#AF1B3F');
+  color2Lbl.clProSettings.FontSize = 16;
+  color2Lbl.clProSettings.FontVertAlign = palCenter;
+  color2Lbl.clProSettings.FontHorzAlign = palLeading;
+  color2Lbl.clProSettings.TextSettings.Font.Style = [fsBold];
+  color2Lbl.clProSettings.BorderColor = clAlphaColor.clHexToColor('#ffffff');
+  color2Lbl.clProSettings.WordWrap = True;
+  color2Lbl.SetclProSettings(color2Lbl.clProSettings);
+  color2Lbl.OnClick='color2LblOnClick';
+  
+  SecondImg = MainForm.AddNewProImage(color2Pnl,'SecondImg');
+  SecondImg.Align = alClient;
+  SecondImg.clProSettings.PictureSource = 'https://clomosy.com/illustration/erkekalt.png' ;
+  SecondImg.SetclProSettings(SecondImg.clProSettings);
+  SecondImg.OnClick='color2PnlOnClick';
+  
+  //---------------------------------------------------------------------------
+  
+  color3Pnl = MainForm.AddNewProPanel(OnlyLayout,'color3Pnl');
+  color3Pnl.Align = AlTop ;
+  color3Pnl.Height = OnlyLayout.Height / 3;
+  color3Pnl.clProSettings.BackgroundColor = clAlphaColor.clHexToColor('#01FDF6');
+  color3Pnl.SetclProSettings(color3Pnl.clProSettings);
+  color3Pnl.OnClick='color3PnlOnClick';
+  
+  color3Lbl = MainForm.AddNewProLabel(color3Pnl,'color3Lbl','#01FDF6');
+  color3Lbl.Align = AlRight;
+  color3Lbl.Width = 80;
+  color3Lbl.Margins.Top = color3Pnl.Height/1.5;
+  color3Lbl.clProSettings.RoundHeight = 10;
+  color3Lbl.clProSettings.RoundHeight = 10;
+  color3Lbl.clProSettings.BorderWidth = 2;
+  color3Lbl.clProSettings.BackgroundColor = clAlphaColor.clHexToColor('#ffffff');
+  color3Lbl.clProSettings.FontColor = clAlphaColor.clHexToColor('#AF1B3F');
+  color3Lbl.clProSettings.FontSize = 16;
+  color3Lbl.clProSettings.FontVertAlign = palCenter;
+  color3Lbl.clProSettings.FontHorzAlign = palLeading;
+  color3Lbl.clProSettings.TextSettings.Font.Style = [fsBold];
+  color3Lbl.clProSettings.BorderColor = clAlphaColor.clHexToColor('#ffffff');
+  color3Lbl.clProSettings.WordWrap = True;
+  color3Lbl.SetclProSettings(color3Lbl.clProSettings);
+  color3Lbl.OnClick='color3LblOnClick';
+  
+  ThirdImg = MainForm.AddNewProImage(color3Pnl,'ThirdImg');
+  ThirdImg.Align = alClient;
+  ThirdImg.clProSettings.PictureSource = 'https://clomosy.com/illustration/erkekayakkabi.png' ;
+  ThirdImg.SetclProSettings(ThirdImg.clProSettings);
+  ThirdImg.OnClick='color3PnlOnClick';
+  
+  //..............................................................................//
+  
+  
+  MaleBtn = MainForm.AddNewProButton(genderLyt,'MaleBtn','');
+  MaleBtn.Align = AlLeft;
+  MaleBtn.Width  = 80;
+  MaleBtn.Height = 50;
+  MaleBtn.clProSettings.BorderColor = clAlphaColor.clHexToColor('#ffffff');
+  MaleBtn.clProSettings.BackgroundColor = clAlphaColor.clHexToColor('#689bca');
+  MaleBtn.clProSettings.BorderWidth = 1;
+  MaleBtn.clProSettings.RoundHeight = 10;
+  MaleBtn.clProSettings.RoundWidth = 10;
+  MaleBtn.clProSettings.PictureSource = 'https://clomosy.com/educa/male.png';
+  MaleBtn.clProSettings.PictureAutoFit = True;
+  MaleBtn.SetclProSettings(MaleBtn.clProSettings);
+  MaleBtn.OnClick='MaleBtnOnClick';
+  
+  femaleBtn = MainForm.AddNewProImage(genderLyt,'femaleBtn');
+  femaleBtn.Align = AlRight;
+  femaleBtn.Width  = 80;
+  femaleBtn.Height = 50;
+  femaleBtn.clProSettings.BorderColor = clAlphaColor.clHexToColor('#ffffff');
+  femaleBtn.clProSettings.BackgroundColor = clAlphaColor.clHexToColor('#cd5c5c');
+  femaleBtn.clProSettings.BorderWidth = 1;
+  femaleBtn.clProSettings.RoundHeight = 10;
+  femaleBtn.clProSettings.RoundWidth = 10;
+  femaleBtn.clProSettings.PictureSource = 'https://clomosy.com/educa/female.png';
+  femaleBtn.clProSettings.PictureAutoFit = True;
+  femaleBtn.SetclProSettings(femaleBtn.clProSettings);
+  femaleBtn.OnClick='FemaleBtnOnClick';
+  
  
- //..............................................................................//
-  
-   
-    genderLyt = MyForm.AddNewLayout(MyForm,'testLayout');
-    genderLyt.Align = alBottom;
-    genderLyt.Height = 65;
-    genderLyt.Width = 270;
-    genderLyt.Margins.Top = 20;
-    genderLyt.Margins.Left = 90;
-    genderLyt.Margins.Right = 90;
-    genderLyt.Margins.Bottom = 40;
- 
-    MaleBtn = MyForm.AddNewProButton(genderLyt,'MaleBtn','');
-   clComponent.SetupComponent(MaleBtn,'{"Align" : "left","Width" :80, 
-  "Height":50,"BorderColor":"#ffffff","BackgroundColor":"#689bca", "BorderWidth":1,"RoundHeight":10,"RoundWidth":10,
-  "ImgUrl":"https://clomosy.com/educa/male.png", "ImgFit":"yes"}');
-  
-
- 
-  MyForm.AddNewEvent(MaleBtn,tbeOnClick,'MaleBtnOnClick');
- 
-  femaleBtn = MyForm.AddNewProImage(genderLyt,'femaleBtn');
-  clComponent.SetupComponent(femaleBtn,'{"Align" : "right","Width" :80,
- "Height":50,"BorderColor":"#ffffff","BackgroundColor":"#cd5c5c", "BorderWidth":1,"RoundHeight":10,"RoundWidth":10,
-    
-  "ImgUrl":"https://clomosy.com/educa/female.png", "ImgFit":"yes"}');
-    
-  MyForm.AddNewEvent(femaleBtn,tbeOnClick,'FemaleBtnOnClick');
-  
-  
-  MyForm.SetFormBGImage('https://clomosy.com/educa/bg1.png');
-  
- MyForm.Run;
+  MainForm.Run;
 }
